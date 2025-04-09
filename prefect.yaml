@@ -1,0 +1,37 @@
+# Por que precisamos do prefect.yaml?
+# Apesar do Prefect ser 100% Python, o arquivo prefect.yaml é essencial por três razões principais:
+# 📌 1. Configura o deploy do projeto
+# Ele define como seu projeto deve ser empacotado e executado no momento do prefect deploy, com informações como:
+# nome do flow;
+# entrypoint;
+# repositório remoto (pull);
+# work pool e queue;
+# schedules (caso existam).
+# 📌 2. Integra-se ao Prefect Cloud ou Server
+# Durante o deploy, o CLI do Prefect usa esse YAML como base de configuração declarativa, assim você não precisa informar todos os parâmetros manualmente na linha de comando.
+# 📌 3. Padroniza seu pipeline
+# Ele permite que seu projeto seja facilmente portável e reexecutado em qualquer ambiente (CI/CD, container, nuvem, etc.) sem depender da configuração manual do desenvolvedor.
+
+# 📘 Arquivo de configuração do Prefect para a Calculadora Simples
+
+name: calculadora-simples
+prefect-version: 2.16.4
+
+pull:
+  - prefect.deployments.steps.git_clone:
+      repository: https://github.com/accolombini/CALCULADORA_SIMPLES.git
+      branch: main
+
+deployments:
+  - name: hello-deploy
+    entrypoint: flows/flow_versao1.py:flow_versao1
+    parameters: {}
+    work_pool:
+      name: hello-pool
+      work_queue_name: default
+      job_variables: {}
+    tags: [versao1, testes, validado]
+    version: "1.0"
+    description: >
+      Versão 1 do fluxo orquestrado da Calculadora Simples, com adição e subtração.
+      Os testes unitários são executados automaticamente antes do processamento principal.

@@ -54,3 +54,26 @@ Este projeto será utilizado como base didática para demonstrar:
   - Novo deploy automático via GitHub Actions e Prefect Cloud.
 - O pipeline de CI/CD será mantido em `infra/`.
 
+🔹 SOBRE TYPE HINTS
+- São anotações de tipo (`int`, `float`, `str`, etc.) usadas para indicar o tipo esperado de argumentos e retornos.
+- Facilitam a leitura, a manutenção e a análise por ferramentas como linters, editores (VSCode) e documentação automatizada.
+- Exemplo:
+  ```python
+  def somar(self, a: float, b: float) -> float:
+      return a + b
+
+🔹 SOBRE __init__.py
+
+Esse arquivo transforma o diretório em um pacote Python, permitindo importações estruturadas.
+Pode ser vazio ou conter inicializações de submódulos, aliases ou registros.
+Alternativamente, pode conter código como: from .operacoes import Calculadora
+
+🔹 USO DE DOCSTRINGS
+
+São cadeias de caracteres usadas para documentar classes, funções e métodos diretamente no código.
+
+Vantagens:
+
+    Facilitam a compreensão por outros desenvolvedores.
+    Podem ser lidas por ferramentas automáticas de geração de documentação.
+    São exibidas automaticamente no autocompletar de editores como VSCode.
