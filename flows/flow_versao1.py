@@ -16,9 +16,9 @@ flow_versao1.py — Orquestra o primeiro fluxo da Calculadora Simples
 Executa testes automatizados antes de executar operações
 """
 
+import subprocess
 from prefect import flow, task
 from modules.operacoes import Calculadora
-import subprocess
 
 
 @task(name="Executar Testes Automatizados")
@@ -47,6 +47,12 @@ def executar_operacoes(valor1: float, valor2: float) -> None:
     calc = Calculadora()
     print("Soma:", calc.somar(valor1, valor2))
     print("Subtração:", calc.subtrair(valor1, valor2))
+    print("Multiplicação:", calc.multiplicar(valor1, valor2))
+    try:
+        print("Divisão:", calc.dividir(valor1, valor2))
+    except ValueError as e:
+        print("Erro ao dividir:", str(e))
+    print("Operações concluídas.")
 
 
 @flow(name="flow-versao1")

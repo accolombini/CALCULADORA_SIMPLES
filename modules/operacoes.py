@@ -59,6 +59,26 @@ class Operacoes:
         """
         return a - b
 
+    def multiplicar(self, a: float, b: float) -> float:
+        """
+        Retorna a multiplicação entre dois números.
+        :param a: Primeiro número
+        :param b: Segundo número
+        :return: Resultado da multiplicação
+        """
+        return a * b
+
+    def dividir(self, a: float, b: float) -> float:
+        """
+        Retorna a divisão entre dois números.
+        :param a: Primeiro número
+        :param b: Segundo número
+        :return: Resultado da divisão
+        """
+        if b == 0:
+            raise ValueError("Divisão por zero não é permitida.")
+        return a / b
+
 
 class Calculadora:
     """
@@ -85,3 +105,15 @@ class Calculadora:
         Realiza a operação de subtração usando a classe Operacoes.
         """
         return self.operacoes.subtrair(a, b)
+
+    def multiplicar(self, a: float, b: float) -> float:
+        """
+        Realiza a operação de multiplicação usando a classe Operacoes.
+        """
+        return self.operacoes.multiplicar(a, b)
+
+    def dividir(self, a: float, b: float) -> float:
+        """
+        Realiza a operação de divisão usando a classe Operacoes.
+        """
+        return self.operacoes.dividir(a, b)

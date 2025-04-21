@@ -34,6 +34,28 @@ class TestCalculadora(unittest.TestCase):
         """
         resultado = self.calc.subtrair(10, 5)
         self.assertEqual(resultado, 5)
+    
+    def test_multiplicacao(self):
+        """
+        Testa se a multiplicação entre dois números está correta.
+        """
+        resultado = self.calc.multiplicar(10, 5)
+        self.assertEqual(resultado, 50) 
+    
+    def test_divisao(self):
+        """
+        Testa se a divisão entre dois números está correta.
+        """
+        resultado = self.calc.dividir(10, 5)
+        self.assertEqual(resultado, 2)
+    
+    def test_divisao_por_zero(self):
+        """
+        Testa se a divisão por zero levanta uma exceção.
+        """
+        with self.assertRaises(ValueError):
+            self.calc.dividir(10, 0)
+    
 
 
 if __name__ == "__main__":
