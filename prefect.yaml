@@ -18,20 +18,24 @@ name: calculadora-simples
 prefect-version: 2.16.4
 
 pull:
-  - prefect.deployments.steps.git_clone:
-      repository: https://github.com/accolombini/CALCULADORA_SIMPLES.git
-      branch: main
+- prefect.deployments.steps.git_clone:
+    repository: https://github.com/accolombini/CALCULADORA_SIMPLES.git
+    branch: main
 
 deployments:
-  - name: hello-deploy
-    entrypoint: flows/flow_versao1.py:flow_versao1
-    parameters: {}
-    work_pool:
-      name: hello-pool
-      work_queue_name: default
-      job_variables: {}
-    tags: [versao1, testes, validado]
-    version: "1.0"
-    description: >
-      Versão 1 do fluxo orquestrado da Calculadora Simples, com adição e subtração.
-      Os testes unitários são executados automaticamente antes do processamento principal.
+- name: hello-deploy
+  entrypoint: flows/flow_versao1.py:flow_versao1
+  parameters: {}
+  work_pool:
+    name: hello-pool
+    work_queue_name: default
+    job_variables: {}
+  tags:
+  - versao1
+  - testes
+  - validado
+  version: '1.0'
+  description: "Versão 1 do fluxo orquestrado da Calculadora Simples, com adição e
+    subtração. Os testes unitários são executados automaticamente antes do processamento
+    principal.\n"
+  schedules: []

@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: prefect
+      POSTGRES_PASSWORD: prefect
+      POSTGRES_DB: prefect
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - prefect-net
+
+  hasura:
+    image: hasura/graphql-engine:v2.30.0
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://prefect:prefect@postgres:5432/prefect
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOGS: startup, http-log, webhook-log, websocket-log
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - prefect-net
+
+  prefect-server:
+    image: prefecthq/prefect:2.16.4-python3.12
+    command: prefect server start --host 0.0.0.0 --port 4200
+    environment:
+      - PREFECT_HOME=/root/.prefect
+    ports:
+      - "4200:4200"
+    volumes:
+      - prefect_data:/root/.prefect
+    depends_on:
+      - postgres
+    networks:
+      - prefect-net
+
+volumes:
+  pgdata:
+  prefect_data:
+
+networks:
+  prefect-net:
