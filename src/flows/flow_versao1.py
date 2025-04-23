@@ -16,6 +16,7 @@ flow_versao1.py — Orquestra o primeiro fluxo da Calculadora Simples
 Executa testes automatizados antes de executar operações
 """
 
+
 import subprocess
 from prefect import flow, task
 from modules.operacoes import Calculadora

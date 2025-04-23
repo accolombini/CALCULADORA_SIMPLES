@@ -14,28 +14,27 @@
 
 # 📘 Arquivo de configuração do Prefect para a Calculadora Simples
 
-name: calculadora-simples
+name: hello-deploy
 prefect-version: 2.16.4
 
-pull:
-- prefect.deployments.steps.git_clone:
-    repository: https://github.com/accolombini/CALCULADORA_SIMPLES.git
-    branch: main
-
 deployments:
-- name: hello-deploy
-  entrypoint: flows/flow_versao1.py:flow_versao1
-  parameters: {}
-  work_pool:
-    name: hello-pool
-    work_queue_name: default
-    job_variables: {}
-  tags:
-  - versao1
-  - testes
-  - validado
-  version: '1.0'
-  description: "Versão 1 do fluxo orquestrado da Calculadora Simples, com adição e
-    subtração. Os testes unitários são executados automaticamente antes do processamento
-    principal.\n"
-  schedules: []
+  - name: hello-deploy
+    entrypoint: src/flows/flow_versao1.py:flow_versao1
+    parameters: {} # ← necessário para evitar erro de execução CLI
+    work_pool:
+      name: hello-pool
+      work_queue_name: default
+      job_variables: {}
+    version: "1.0"
+    tags:
+      - calculadora
+      - versao1
+      - src
+    description: >
+      Versão 1 da Calculadora Simples orquestrada com Prefect.
+      Inclui operações matemáticas básicas e execução de testes automatizados antes da execução principal.
+    schedule:
+      interval: 3600
+      anchor_date: "2025-04-23T21:00:00+00:00"
+      timezone: "UTC"
+      active: true

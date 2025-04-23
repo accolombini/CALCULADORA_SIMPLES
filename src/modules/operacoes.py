@@ -117,3 +117,12 @@ class Calculadora:
         Realiza a operação de divisão usando a classe Operacoes.
         """
         return self.operacoes.dividir(a, b)
+
+    def porcentagem(self, a: float, b: float) -> float:
+        """
+        Retorna a porcentagem entre dois números.
+        :param a: Primeiro número
+        :param b: Segundo número
+        :return: Resultado da porcentagem
+        """
+        return (a * b) / 100
