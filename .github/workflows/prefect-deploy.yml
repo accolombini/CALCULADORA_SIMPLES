@@ -36,6 +36,8 @@ jobs:
 
       - name: 📦 Instalar dependências
         run: |
+          echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
+
           pip install -U pip
           pip install -r requirements.txt
           pip install prefect==2.16.4
