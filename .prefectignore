@@ -1,3 +1,5 @@
 # .prefectignore
+# Ignora qualquer pasta __pycache__.
 __pycache__/
+
 infra/*.deployment.yaml
